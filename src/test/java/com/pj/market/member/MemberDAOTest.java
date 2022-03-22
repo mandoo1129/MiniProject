@@ -1,0 +1,27 @@
+package com.pj.market.member;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.pj.market.MyJunitTest;
+
+public class MemberDAOTest extends MyJunitTest {
+
+	@Autowired
+	private MemberDAO memberDAO;
+
+	@Test
+	public void joinTest() throws Exception {
+		MemberDTO memberDTO = new MemberDTO();
+		memberDTO.setId("idtest");
+		memberDTO.setPw("pwtest");
+		memberDTO.setName("testname");
+		memberDTO.setEmail("test@test");
+		memberDTO.setAddress("addresstest");
+
+		int result = memberDAO.join(memberDTO);
+		assertEquals(1, result);
+	}
+}
