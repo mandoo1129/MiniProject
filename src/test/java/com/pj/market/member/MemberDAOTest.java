@@ -13,6 +13,16 @@ public class MemberDAOTest extends MyJunitTest {
 	private MemberDAO memberDAO;
 
 	@Test
+	public void loginTest() throws Exception {
+		MemberDTO memberDTO = new MemberDTO();
+		memberDTO.setId("1");
+		memberDTO.setPw("2");
+
+		memberDTO = memberDAO.login(memberDTO);
+		assertNotNull(memberDTO);
+	}
+
+	// @Test
 	public void joinTest() throws Exception {
 		MemberDTO memberDTO = new MemberDTO();
 		memberDTO.setId("idtest");
