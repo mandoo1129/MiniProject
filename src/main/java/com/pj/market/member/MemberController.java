@@ -3,6 +3,7 @@ package com.pj.market.member;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,23 +19,51 @@ public class MemberController {
 	@Autowired
 	private MemberService memberService;
 
-	@PostMapping("login")
-	public String login(MemberDTO memberDTO, String remember, Model model, HttpServletResponse response)
-			throws Exception {
-
-		System.out.println("remeber" + remember);
-
-		if (remember.equals("1")) {
-			Cookie cookie = new Cookie("remember", memberDTO.getId());
-			cookie.setPath("/");
-			response.addCookie(cookie);
-		}
+	@GetMapping("update")
+	public void update(HttpSession session, Model model) throws Exception{
+		MemberDTO memberDTO = (MemberDTO) session.getAttribute("member");
+		memberDTO = memberService.mypage(memberDTO);
+		model.addAttribute("dto", memberDTO);
+	}
+	
+	@PostMapping("loginCheck")
+	public String loginCheck(MemberDTO memberDTO) throws Exception{
+		memberDTO = memberService.login(memberDTO);
 		
+		String path = "redirect: ./"; // login failed
+
+		if (memberDTO != null) {
+			path = "redirect: ./update"; // login success
+		}
+
+		return path;
+	}
+	
+	@GetMapping("loginCheck")
+	public void loginCheck() throws Exception{}
+	
+	@GetMapping("mypage")
+	public void mypage(HttpSession session, Model model) throws Exception {
+		MemberDTO memberDTO = (MemberDTO) session.getAttribute("member");
+		memberDTO = memberService.mypage(memberDTO);
+		model.addAttribute("dto", memberDTO);
+	}
+
+	@GetMapping("logout")
+	public String logout(HttpSession session) throws Exception {
+		session.invalidate();
+		// session 해제하는 코드
+		return "redirect: ../";
+	}
+
+	@PostMapping("login")
+	public String login(HttpSession session, MemberDTO memberDTO) throws Exception {
 		memberDTO = memberService.login(memberDTO);
 
 		String path = "redirect: ./login"; // login failed
 
 		if (memberDTO != null) {
+			session.setAttribute("member", memberDTO);
 			path = "redirect: ../"; // login success
 		}
 

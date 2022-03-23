@@ -5,6 +5,13 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
     
 <mapper namespace="com.pj.market.member.MemberDAO">
+
+
+	<select id="mypage" parameterType="MemberDTO" resultType="MemberDTO">
+		select id, name, email, address from member1
+		where id=#{id}
+	</select>
+	
 	<select id="login" parameterType="MemberDTO" resultType="MemberDTO">
 		SELECT ID, NAME FROM MEMBER1 
 		WHERE ID = #{id} AND PW=#{pw}
