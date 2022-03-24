@@ -19,17 +19,23 @@ public class MemberController {
 	@Autowired
 	private MemberService memberService;
 
+	@PostMapping("update")
+	public String update(MemberDTO memberDTO) throws Exception {
+		memberService.update(memberDTO);
+		return "redirect: ./mypage";
+	}
+
 	@GetMapping("update")
-	public void update(HttpSession session, Model model) throws Exception{
+	public void update(HttpSession session, Model model) throws Exception {
 		MemberDTO memberDTO = (MemberDTO) session.getAttribute("member");
 		memberDTO = memberService.mypage(memberDTO);
 		model.addAttribute("dto", memberDTO);
 	}
-	
+
 	@PostMapping("loginCheck")
-	public String loginCheck(MemberDTO memberDTO) throws Exception{
+	public String loginCheck(MemberDTO memberDTO) throws Exception {
 		memberDTO = memberService.login(memberDTO);
-		
+
 		String path = "redirect: ./"; // login failed
 
 		if (memberDTO != null) {
@@ -38,10 +44,11 @@ public class MemberController {
 
 		return path;
 	}
-	
+
 	@GetMapping("loginCheck")
-	public void loginCheck() throws Exception{}
-	
+	public void loginCheck() throws Exception {
+	}
+
 	@GetMapping("mypage")
 	public void mypage(HttpSession session, Model model) throws Exception {
 		MemberDTO memberDTO = (MemberDTO) session.getAttribute("member");

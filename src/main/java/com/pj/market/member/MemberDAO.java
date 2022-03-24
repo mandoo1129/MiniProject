@@ -12,6 +12,10 @@ public class MemberDAO {
 
 	private final String NAMESPACE = "com.pj.market.member.MemberDAO.";
 
+	public int update(MemberDTO memberDTO) throws Exception {
+		return sqlSession.update(NAMESPACE+"update", memberDTO);
+	}
+	
 	public MemberDTO mypage(MemberDTO memberDTO) throws Exception {
 		return sqlSession.selectOne(NAMESPACE + "mypage", memberDTO);
 	}
