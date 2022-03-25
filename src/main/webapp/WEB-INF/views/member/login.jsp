@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,6 +9,7 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 </head>
 <body>
+	<c:import url="../template/header.jsp"></c:import>
 	<h1>로그인</h1>
 	
 	<div>
@@ -21,6 +23,8 @@
 				<legend>pw</legend>
 				<input type="password" name="pw">
 			</fieldset>
+
+			<h6><a></a></h6>
 		
 			<div class="d-grid gap-2 col-6 mx-auto">
 			  <button class="btn btn-primary" type="submit">로그인</button>
