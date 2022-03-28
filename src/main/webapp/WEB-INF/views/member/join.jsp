@@ -14,27 +14,51 @@
 	<h1>회원가입</h1>
 	
 	<div class="join-box">
-		<form action="./join" method="post">
+		<form action="./join" method="post" id="frm">
 			<fieldset>
-				ID <input type="text" name="id">
+				ID <input id="id" type="text" name="id">
+				<div id="idResult"></div>
 			</fieldset>
 			
 			<fieldset>
-				PW <input type="password" name="pw">
+				PW <input id="pw" type="password" name="pw" placeholder="8~16자에 해당하는 비밀번호를 입력해주세요.">
+				<div id="pwResult"></div>
+			</fieldset>
+
+			<fieldset>
+				PW 재확인 <input id="pw2" type="password" name="pw2" placeholder="입력하신 비밀번호와 동일한 비밀번호를 입력해주세요.">
+				<div id="pwResult2"></div>
 			</fieldset>
 			
 			<fieldset>
-				Name <input type="text" name="name">
+				Name <input id="name" type="text" name="name">
+				<div id="nameResult"></div>
 			</fieldset>
 			
 			<fieldset>
-				Email <input type="email" name="email">
+				Email <input id="email" type="email" name="email">
+				<div id="emailResult"></div>
 			</fieldset>
 			
 			<fieldset>
-				Address <input type="text" name="address">
+				Address <input id="address" type="text" name="address" readonly>
+				<div id="addressResult"></div>
 			</fieldset>
 			
+			<script>
+				window.onload=function(){
+					document.getElementById("address").addEventListener("click", function(){
+						new daum.Postcode({
+							oncomplete: function(data) {
+								// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
+								// 예제를 참고하여 다양한 활용법을 확인해 보세요.
+								document.getElementById("address").value=data.address;
+							}
+						}).open();						
+					})
+				}
+			</script>
+
 			<div class="list-group">
 				<label class="list-group-item">
 				  <input class="form-check-input" type="checkbox" id="checkAll" value="">
@@ -46,7 +70,7 @@
 				  <div class="termsText">
 					"제1조(목적)"
 					<br>
-					"이 약관은 ㅋㅋ"
+					"이 약관은"
 				  </div>
 				</label>
 				<label class="list-group-item">
@@ -60,11 +84,12 @@
 			  </div>
 
 			<fieldset>
-				<button type="submit" class="btn btn-primary" id="btn">가입하기</button>
+				<button type="button" class="btn btn-primary" id="btn">가입하기</button>
 			</fieldset>
 		</form>
 	</div>
 
+	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script src="../resources/js/join.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </body>
