@@ -8,6 +8,12 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>list page</h1>
+<c:import url="../template/header.jsp"></c:import>
+
+<h1>전체 상품 보기</h1>
+<c:import url="../template/list.jsp"></c:import>
+
+
+<c:import url="../template/footer.jsp"></c:import>
 </body>
 </html>

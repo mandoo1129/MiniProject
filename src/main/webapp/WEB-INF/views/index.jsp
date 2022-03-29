@@ -17,6 +17,6 @@
 	
 	<P>  The time on the server is ${serverTime}. </P>
 	
-
+	<c:import url="./template/footer.jsp"></c:import>
 </body>
 </html>

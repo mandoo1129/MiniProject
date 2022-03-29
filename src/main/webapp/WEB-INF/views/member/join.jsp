@@ -88,6 +88,8 @@
 			</fieldset>
 		</form>
 	</div>
+	
+	<c:import url="../template/footer.jsp"></c:import>
 
 	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script src="../resources/js/join.js"></script>
